@@ -29,7 +29,8 @@ namespace vold {
 void defaultkey_precreate_dm_device();
 bool fscrypt_mount_metadata_encrypted(const std::string& block_device,
                                       const std::string& mount_point, bool needs_encrypt,
-                                      bool should_format, const std::string& fs_type, std::string fstab_path = "");
+                                      bool should_format, const std::string& fs_type,
+                                      const std::string& zoned_device, std::string fstab_path = "");
 
 bool defaultkey_volume_keygen(KeyGeneration* gen);
 
