@@ -213,13 +213,11 @@ cc_binary {
 
     init_rc: [
         "vold.rc",
-        "wait_for_keymaster.rc",
     ],
 
     required: [
         "mke2fs",
         "vold_prepare_subdirs",
-        "wait_for_keymaster",
     ],
 
     product_variables: {
@@ -254,16 +252,6 @@ cc_binary {
         "libvold_binder",
     ],
     init_rc: ["vdc.rc"],
-}
-
-cc_binary {
-    name: "wait_for_keymaster",
-    defaults: ["vold_default_flags"],
-
-    srcs: [
-        "wait_for_keymaster.cpp",
-        "Keystore.cpp",
-    ],
 }
 
 cc_binary {
