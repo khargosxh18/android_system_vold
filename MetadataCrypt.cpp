@@ -97,7 +97,7 @@ void defaultkey_precreate_dm_device() {
     }
 }
 
-static bool mount_via_fs_mgr(const char* mount_point, const char* blk_device) {
+static bool mount_via_fs_mgr(const char* mount_point, const char* blk_device, bool needs_encrypt) {
     // fs_mgr_do_mount runs fsck. Use setexeccon to run trusted
     // partitions in the fsck domain.
     if (setexeccon(android::vold::sFsckContext)) {
@@ -106,7 +106,8 @@ static bool mount_via_fs_mgr(const char* mount_point, const char* blk_device) {
     }
     auto mount_rc = fs_mgr_do_mount(&fstab_default, const_cast<char*>(mount_point),
                                     const_cast<char*>(blk_device), nullptr,
-                                    android::vold::cp_needsCheckpoint(), true);
+                                    needs_encrypt? false: android::vold::cp_needsCheckpoint(),
+                                    true);
     if (setexeccon(nullptr)) {
         PLOG(ERROR) << "Failed to clear setexeccon";
         return false;
@@ -419,7 +420,7 @@ bool fscrypt_mount_metadata_encrypted(const std::string& blk_device, const std::
     }
 
     LOG(INFO) << "Mounting metadata-encrypted filesystem:" << mount_point;
-    mount_via_fs_mgr(mount_point.c_str(), crypto_blkdev.c_str());
+    mount_via_fs_mgr(mount_point.c_str(), crypto_blkdev.c_str(), needs_encrypt);
     android::base::SetProperty("ro.crypto.fs_crypto_blkdev", crypto_blkdev);
 
     fs_mgr_unmount_all_data_mounts(crypto_blkdev); // Unmount after successfull checking mounting this may cause the post decryption not work correctly
