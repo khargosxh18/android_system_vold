@@ -218,6 +218,7 @@ cc_binary {
     required: [
         "mke2fs",
         "vold_prepare_subdirs",
+        "fuse_media.o",
     ],
 
     product_variables: {
