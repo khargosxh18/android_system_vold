@@ -154,7 +154,6 @@ cc_library_static {
         "NetlinkHandler.cpp",
         "NetlinkManager.cpp",
         "Process.cpp",
-        "ScryptParameters.cpp",
         "Utils.cpp",
         "VoldNativeService.cpp",
         "VoldNativeServiceValidation.cpp",
