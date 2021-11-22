@@ -59,7 +59,6 @@ cc_defaults {
         "android.hardware.keymaster@4.1",
         "android.hardware.security.keymint-V3-ndk",
         "android.security.authorization-ndk",
-        "android.system.keystore2-V3-ndk",
         "libboot_control_client",
         "libbase",
         "libbinder",
@@ -129,6 +128,7 @@ cc_library_static {
     defaults: [
         "vold_default_flags",
         "vold_default_libs",
+        "keystore2_use_latest_aidl_ndk_shared",
         "vold_hw_fde_defaults",
         "vold_hw_fde_perf_defaults",
     ],
@@ -203,6 +203,7 @@ cc_binary {
     defaults: [
         "vold_default_flags",
         "vold_default_libs",
+        "keystore2_use_latest_aidl_ndk_shared",
         "vold_hw_fde_defaults",
     ],
 
