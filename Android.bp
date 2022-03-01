@@ -142,7 +142,6 @@ cc_library_static {
         "cryptfs.cpp",
         "CryptoType.cpp",
         "Decrypt.cpp",
-        "Devmapper.cpp",
         "EncryptInplace.cpp",
         "FileDeviceUtils.cpp",
         "FsCrypt.cpp",
