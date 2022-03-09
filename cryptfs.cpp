@@ -2954,7 +2954,7 @@ int cryptfs_enable_internal(int crypt_type, const char* passwd, int no_ui) {
     }
 #endif
     if (!rc) {
-        if (encrypt_inplace(crypto_blkdev, real_blkdev, crypt_ftr.fs_size, true)) {
+        if (encrypt_inplace(crypto_blkdev, real_blkdev, crypt_ftr.fs_size)) {
             crypt_ftr.encrypted_upto = crypt_ftr.fs_size;
             rc = 0;
         } else {

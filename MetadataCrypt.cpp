@@ -381,7 +381,7 @@ bool fscrypt_mount_metadata_encrypted(const std::string& blk_device, const std::
             LOG(INFO) << "Format (err=" << error << ") " << crypto_blkdev << " on " << mount_point;
             if (error != 0) return false;
         } else {
-            if (!encrypt_inplace(crypto_blkdev, blk_device, nr_sec, false)) return false;
+            if (!encrypt_inplace(crypto_blkdev, blk_device, nr_sec)) return false;
         }
     }
 
