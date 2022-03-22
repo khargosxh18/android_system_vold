@@ -536,6 +536,8 @@ static bool prepare_special_dirs() {
     return true;
 }
 
+bool fscrypt_init_user0_done;
+
 bool fscrypt_init_user0() {
     LOG(INFO) << "fscrypt_init_user0";
 
@@ -578,6 +580,7 @@ bool fscrypt_init_user0() {
         if (!try_reload_ce_keys()) return false;
     }
 
+    fscrypt_init_user0_done = true;
     return true;
 }
 
