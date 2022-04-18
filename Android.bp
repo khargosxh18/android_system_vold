@@ -15,8 +15,6 @@ cc_defaults {
         "-Wno-macro-redefined",
     ],
 
-    clang: true,
-
     tidy: true,
     tidy_checks: [
         "-*",
@@ -198,7 +196,7 @@ cc_library_static {
     ],
     whole_static_libs: [
         "com.android.sysprop.apex",
-        "libc++fs"
+        "libc++fs",
     ],
 }
 
@@ -241,7 +239,7 @@ cc_binary {
                 "libarcvolume",
             ],
         },
-	},
+    },
 }
 
 cc_binary {
@@ -304,7 +302,10 @@ cc_binary {
     name: "vold_prepare_subdirs",
     defaults: ["vold_default_flags"],
 
-    srcs: ["vold_prepare_subdirs.cpp", "Utils.cpp"],
+    srcs: [
+        "vold_prepare_subdirs.cpp",
+        "Utils.cpp",
+    ],
     shared_libs: [
         "libbase",
         "libcutils",
