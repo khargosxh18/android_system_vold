@@ -2432,7 +2432,7 @@ int cryptfs_setup_ext_volume(const char* label, const char* real_blkdev, const K
     strlcpy((char*)ext_crypt_ftr.crypto_type_name, crypto_type.get_kernel_name(),
             MAX_CRYPTO_TYPE_NAME_LEN);
     uint32_t flags = 0;
-    if (fscrypt_is_native() &&
+    if (IsFbeEnabled() &&
         android::base::GetBoolProperty("ro.crypto.allow_encrypt_override", false))
         flags |= CREATE_CRYPTO_BLK_DEV_FLAGS_ALLOW_ENCRYPT_OVERRIDE;
 
