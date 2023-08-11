@@ -28,7 +28,6 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
-#include <android-base/properties.h>
 #include <keyutils.h>
 
 #include "KeyStorage.h"
@@ -93,7 +92,6 @@ static bool isFsKeyringSupportedImpl() {
         PLOG(WARNING) << "Unexpected error from FS_IOC_ADD_ENCRYPTION_KEY";
     }
     LOG(INFO) << "Detected support for FS_IOC_ADD_ENCRYPTION_KEY";
-    android::base::SetProperty("ro.crypto.uses_fs_ioc_add_encryption_key", "true");
     return true;
 }
 
