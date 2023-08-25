@@ -187,7 +187,6 @@ cc_library_static {
         },
     },
     whole_static_libs: [
-        "libcom.android.sysprop.apex",
         "libc++fs",
     ],
 }
