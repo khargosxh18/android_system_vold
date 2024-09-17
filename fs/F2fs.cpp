@@ -82,7 +82,7 @@ status_t Format(const std::string& source) {
         cmd.emplace_back("-O");
         cmd.emplace_back("quota");
     }
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         cmd.emplace_back("-O");
         cmd.emplace_back("encrypt");
     }

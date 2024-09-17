@@ -577,11 +577,11 @@ binder::Status VoldNativeService::fdeEnable(int32_t passwordType, const std::str
     ACQUIRE_CRYPT_LOCK;
 
     LOG(DEBUG) << "fdeEnable(" << passwordType << ", *, " << encryptionFlags << ")";
-    if (fscrypt_is_native()) {
-        LOG(ERROR) << "fscrypt_is_native, fdeEnable invalid";
-        return error("fscrypt_is_native, fdeEnable invalid");
+    if (IsFbeEnabled()) {
+        LOG(ERROR) << "IsFbeEnabled, fdeEnable invalid";
+        return error("IsFbeEnabled, fdeEnable invalid");
     }
-    LOG(DEBUG) << "!fscrypt_is_native, spawning fdeEnableInternal";
+    LOG(DEBUG) << "!IsFbeEnabled, spawning fdeEnableInternal";
 
     // Spawn as thread so init can issue commands back to vold without
     // causing deadlock, usually as a result of prep_data_fs.
@@ -663,7 +663,7 @@ binder::Status VoldNativeService::mountDefaultEncrypted() {
     ENFORCE_SYSTEM_OR_ROOT;
     ACQUIRE_CRYPT_LOCK;
 
-    if (!fscrypt_is_native()) {
+    if (!IsFbeEnabled()) {
         // Spawn as thread so init can issue commands back to vold without
         // causing deadlock, usually as a result of prep_data_fs.
         std::thread(&cryptfs_mount_default_encrypted).detach();
@@ -957,7 +957,7 @@ static bool IgnoreEarlyBootEnded() {
     // we also explicitly return false on FBE devices.  (This really should be
     // ro.crypto.type != "block" for "non-FDE devices", but on FDE devices this
     // is sometimes called before ro.crypto.type gets set.)
-    if (fscrypt_is_native()) return false;
+    if (IsFbeEnabled()) return false;
 
     struct statfs buf;
     if (statfs(DATA_MNT_POINT, &buf) != 0) {

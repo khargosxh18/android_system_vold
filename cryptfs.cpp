@@ -2153,7 +2153,7 @@ static int cryptfs_restart_internal(int restart_main) {
 
 int cryptfs_restart(void) {
     SLOGI("cryptfs_restart");
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         SLOGE("cryptfs_restart not valid for file encryption:");
         return -1;
     }
@@ -2173,7 +2173,7 @@ static int do_crypto_complete(const char* mount_point) {
     }
 
     // crypto_complete is full disk encrypted status
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         return CRYPTO_COMPLETE_NOT_ENCRYPTED;
     }
 
@@ -2524,7 +2524,7 @@ int cryptfs_check_passwd_hw(const char* passwd)
 
 int cryptfs_check_passwd(const char* passwd) {
     SLOGI("cryptfs_check_passwd");
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         SLOGE("cryptfs_check_passwd not valid for file encryption");
         return -1;
     }
@@ -3059,7 +3059,7 @@ int cryptfs_enable_default(int no_ui) {
 }
 
 int cryptfs_changepw(int crypt_type, const char* currentpw, const char* newpw) {
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         SLOGE("cryptfs_changepw not valid for file encryption");
         return -1;
     }
@@ -3327,7 +3327,7 @@ static int persist_count_keys(const char* fieldname) {
 
 /* Return the value of the specified field. */
 int cryptfs_getfield(const char* fieldname, char* value, int len) {
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         SLOGE("Cannot get field when file encrypted");
         return -1;
     }
@@ -3392,7 +3392,7 @@ out:
 
 /* Set the value of the specified field. */
 int cryptfs_setfield(const char* fieldname, const char* value) {
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         SLOGE("Cannot set field when file encrypted");
         return -1;
     }
@@ -3512,7 +3512,7 @@ int cryptfs_mount_default_encrypted(void) {
 /* Returns type of the password, default, pattern, pin or password.
  */
 int cryptfs_get_password_type(void) {
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         SLOGE("cryptfs_get_password_type not valid for file encryption");
         return -1;
     }
@@ -3532,7 +3532,7 @@ int cryptfs_get_password_type(void) {
 }
 
 const char* cryptfs_get_password() {
-    if (fscrypt_is_native()) {
+    if (IsFbeEnabled()) {
         SLOGE("cryptfs_get_password not valid for file encryption");
         return 0;
     }
