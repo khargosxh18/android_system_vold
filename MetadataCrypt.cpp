@@ -41,7 +41,7 @@
 #include "FsCrypt.h"
 #include "KeyStorage.h"
 #include "KeyUtil.h"
-#include "Keymaster.h"
+#include "Keystore.h"
 #include "Utils.h"
 #include "VoldUtil.h"
 #include "fs/Ext4.h"
@@ -132,7 +132,7 @@ static bool read_key(const std::string& metadata_key_dir, const KeyGeneration& g
                 "ro.crypto.metadata_init_delete_all_keys.enabled", false);
         if (delete_all) {
             LOG(INFO) << "Metadata key does not exist, calling deleteAllKeys";
-            Keymaster::deleteAllKeys();
+            Keystore::deleteAllKeys();
         } else {
             LOG(INFO) << "Metadata key does not exist but "
                           "ro.crypto.metadata_init_delete_all_keys.enabled is false";
