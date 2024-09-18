@@ -127,8 +127,6 @@ cc_library_static {
         "vold_default_flags",
         "vold_default_libs",
         "keystore2_use_latest_aidl_ndk_shared",
-        "vold_hw_fde_defaults",
-        "vold_hw_fde_perf_defaults",
     ],
     include_dirs: [
         "system/core/gatekeeperd/include"
@@ -201,7 +199,6 @@ cc_binary {
         "vold_default_flags",
         "vold_default_libs",
         "keystore2_use_latest_aidl_ndk_shared",
-        "vold_hw_fde_defaults",
     ],
 
     srcs: ["main.cpp"],
