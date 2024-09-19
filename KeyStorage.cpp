@@ -59,7 +59,6 @@ static constexpr size_t AES_KEY_BYTES = 32;
 static constexpr size_t GCM_NONCE_BYTES = 12;
 static constexpr size_t GCM_MAC_BYTES = 16;
 static constexpr size_t SECDISCARDABLE_BYTES = 1 << 14;
-constexpr int EXT4_AES_256_XTS_KEY_SIZE = 64;
 
 static const char* kCurrentVersion = "1";
 static const char* kRmPath = "/system/bin/rm";
