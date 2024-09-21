@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <memory>
 #include <mutex>
+#include <thread>
 #include <vector>
 
 #include <errno.h>
@@ -238,21 +239,21 @@ static std::vector<std::string> key_dirs_to_commit;
 //     return true;
 // }
 
-//void DeferredCommitKeystoreKeys() {
-//    LOG(INFO) << "Committing upgraded Keystore keys";
-//    Keystore keystore;
-//    if (!keystore) {
-//        LOG(ERROR) << "Failed to open Keystore; old keys won't be deleted from Keystore";
-//        // Continue on, but the space in Keystore used by the old keys won't be freed.
-//    }
-//    std::lock_guard<std::mutex> lock(key_upgrade_lock);
-//    for (auto& dir : key_dirs_to_commit) {
-//        LOG(INFO) << "Committing upgraded Keystore key for " << dir;
-//        CommitUpgradedKey(keystore, dir);
-//    }
-//    key_dirs_to_commit.clear();
-//    LOG(INFO) << "Done committing upgraded Keystore keys";
-//}
+// static void DeferredCommitKeys() {
+//     android::base::WaitForProperty("vold.checkpoint_committed", "1");
+//     LOG(INFO) << "Committing upgraded keys";
+//     Keystore keystore;
+//     if (!keystore) {
+//         LOG(ERROR) << "Failed to open Keystore; old keys won't be deleted from Keystore";
+        // Continue on, but the space in Keystore used by the old keys won't be freed.
+//     }
+//     std::lock_guard<std::mutex> lock(key_upgrade_lock);
+//     for (auto& dir : key_dirs_to_commit) {
+//         LOG(INFO) << "Committing upgraded key " << dir;
+//         CommitUpgradedKey(keystore, dir);
+//     }
+//     key_dirs_to_commit.clear();
+// }
 
 // Returns true if the Keystore key in |dir| has already been upgraded and is
 // pending being committed.  Assumes that key_upgrade_lock is held.
@@ -267,6 +268,7 @@ static std::vector<std::string> key_dirs_to_commit;
 // that key_upgrade_lock is held and that a commit isn't already pending for the
 // directory.
 // static void ScheduleKeyCommit(const std::string& dir) {
+//     if (key_dirs_to_commit.empty()) std::thread(DeferredCommitKeys).detach();
 //     key_dirs_to_commit.push_back(dir);
 // }
 
