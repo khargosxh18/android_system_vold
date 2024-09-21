@@ -276,8 +276,8 @@ static bool init_data_file_encryption_options() {
                       "this flag from the device's fstab";
         return false;
     }
-    if (options->version == 1 || !retry) {
-        options->use_hw_wrapped_key =
+    if (s_data_options.version == 1 || !retry) {
+        s_data_options.use_hw_wrapped_key =
             GetEntryForMountPoint(&fstab_default, DATA_MNT_POINT)->fs_mgr_flags.wrapped_key;
     }
     return true;
@@ -503,9 +503,9 @@ install:
     // fscrypt_init_user0() can access it later.
     if (!install_storage_key(DATA_MNT_POINT, s_data_options, device_key, &s_device_policy)) {
         if (retry) {
-            printf("Trying %s wrappedkey\n", options.use_hw_wrapped_key ? "without" : "with");
+            printf("Trying %s wrappedkey\n", s_data_options.use_hw_wrapped_key ? "without" : "with");
             GetEntryForMountPoint(&fstab_default, DATA_MNT_POINT)->fs_mgr_flags.wrapped_key =
-                options.use_hw_wrapped_key = !options.use_hw_wrapped_key;
+                s_data_options.use_hw_wrapped_key = !s_data_options.use_hw_wrapped_key;
             retry = false;
             goto install;
         }
