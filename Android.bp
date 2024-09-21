@@ -31,6 +31,8 @@ cc_defaults {
 
     static_libs: [
         "android.hardware.confirmationui@1.0",
+        "lib_android_keymaster_keymint_utils",
+        "android.hardware.gatekeeper-V1-ndk",
         "android.hardware.gatekeeper@1.0",
         "android.hardware.keymaster@4.1",
         "android.hardware.weaver@1.0",
