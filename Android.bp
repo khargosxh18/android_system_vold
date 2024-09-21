@@ -320,7 +320,8 @@ cc_binary {
     name: "fscryptpolicyget",
     defaults: [
         "vold_default_flags",
-        "vold_default_libs"
+        "vold_default_libs",
+        "keystore2_use_latest_aidl_ndk_shared"
     ],
 
     srcs: ["fscryptpolicyget.cpp"],
