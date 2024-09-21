@@ -113,7 +113,7 @@ extern "C" bool fscrypt_policy_get_struct(const char *directory, fscrypt_policy 
         return false;
     }
     memset(fep, 0, sizeof(fscrypt_policy));
-    struct fscrypt_get_policy_ex_arg ex_policy = {0};
+    struct fscrypt_get_policy_ex_arg ex_policy = {0, {}};
 
     if (android::vold::isFsKeyringSupported()) {
         ex_policy.policy_size = sizeof(ex_policy.policy);
